@@ -125,4 +125,11 @@ function memoizeFunc (func) {
     return cache[key]
   }
 }
-# 函数重载
+# 函数重载 
+根据传入不同的参数个数，匹配查找到不同的结果，类似搜索显示
+["Dean Edwards", "Sam Stephenson", "Alex Russell", "Dean Tom"]
+// 分别传入0， 1， 2个参数测试
+console.log(people.find());  // ["Dean Edwards", "Alex Russell", "Dean Tom"]
+console.log(people.find("Dean"));  // ["Dean Edwards", "Dean Tom"]
+console.log(people.find("Dean Edwards"));  // ["Dean Edwards"]
+
