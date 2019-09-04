@@ -15,3 +15,27 @@ delete o.m  // o中事前没有m
 
 异步是同步发生的，我在login里面请求登录之后，调用callback就可以在登录之后再执行 一些异步的请求
 或者我也可以不用callback，直接就login().then(()=>{})
+# 立即执行函数
+立即执行函数就是（1）定义一个匿名函数，（2）马上调用，无需绑定和等待任何异步，立刻执行。jq开篇就是用的这个
+隔离作用域：避免变量污染和命名冲突
+（function（name）{
+  let greet = ‘hello’
+  let sayHi = () => console.log(`${greet}${name}`)
+}）
+！！下面这个setTimeout是异步执行，操作会被挂起，指导for循环结束，
+变量i是有变量提升效果的var定义，i覆盖全局，每次结束console都被挂起，直到结束i变为10
+吧var变成let！！！：每次循环，i是块作用域，所以执行的值都会保留不会被下次循环覆盖掉
+立即执行函数也利用率保护执行的思想
+for(var i = 0; i < 10; i++){
+  setTimeout(function() {
+    console.log(i);   // 为什么输出了十个10，而不是0-9
+  }, 0)
+}
+for （var i = 0； i<10; i++）{
+ (function(ii) {
+    setTimeout(function() {
+    console.log(i);   // 为什么输出了十个10，而不是0-9
+  }, 0)
+ })(i)
+}
+# 变量提升
