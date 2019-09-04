@@ -108,4 +108,21 @@ console.log(borui.city);  // beijing
 prototype是用来在构造函数添加共享属性，共享方法的，
 （静态属性？实例属性？原型属性？）
 # 自定义对象
-#
+# Memoization - 解决递归卡死
+memoize用于优化比较耗时的计算，计算结果缓存到内存中，这样对于同一的输入值，只需要从内存中获取
+n为40次回调的时候会堵塞
+var fibonacci = function (n) {
+  return n < 2 ? n : arguments.callee(n - 1) + arguments.callee(n - 2);
+}
+console.log(fibonacci(8))
+function memoizeFunc (func) {
+  var cache = {};
+  return function () {
+    var key = arguments[0];
+    if (!cache[key]) {
+      cache[key] = func.apply(this, arguments)
+    }
+    return cache[key]
+  }
+}
+# 函数重载
