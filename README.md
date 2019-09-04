@@ -61,3 +61,51 @@ plus(20)(15);  // 35
 add5(10); // 15
 add8(10);  // 18
 # 构造函数
+不同对象方法，属性无法共享数据，这个时候需要用到prototype
+var Person = function () {
+  this.name = 'zfs';
+  this.age = 25
+  this.intro = function () {
+    console.log(this.name + ' age '  +  this.age)
+  }
+}
+
+var p1 = new Person()
+console.log(p1.name)  // zfs
+p1.intro ()  // zfs age 25
+
+#构造函数的Prototype 
+// 创建构造函数
+function Person (name = 'sg') {
+  this.name = name;  // 实例属性 name
+  this.visited= [];  // 实例属性 travel
+  this.sayHi = function () {  // 实例方法 sayHi()
+    console.log(`Hello, ${name}`)
+  }
+}
+
+Person.prototype.city = 'beijing'  // 原型属性 city
+Person.prototype.travel = function (place) {
+  this.visited.push(place)
+  console.log(this.visited)
+}
+
+let zfs = new Person('zfs')
+let borui = new Person('borui')
+
+console.log(zfs.name)  // 'zfs'
+zfs.sayHi()  // Hello, zfs
+console.log(zfs.city);  // beijing
+zfs.travel('shanghai'); // ['shanghai']
+
+console.log(borui.name)  // borui  实例属性值各自私有
+console.log(borui.city)  // beijing 实例属性被共享
+zfs.travel('chongqin')  // ['shagnhai', 'chongqin'] 
+// 原型共享属性中，当其中一个实例对象的属性值被修改，不会影响其他实例对象。
+zfs.city = 'fujian'; 
+console.log(zfs.city);  // fujian
+console.log(borui.city);  // beijing
+prototype是用来在构造函数添加共享属性，共享方法的，
+（静态属性？实例属性？原型属性？）
+# 自定义对象
+#
