@@ -132,4 +132,8 @@ function memoizeFunc (func) {
 console.log(people.find());  // ["Dean Edwards", "Alex Russell", "Dean Tom"]
 console.log(people.find("Dean"));  // ["Dean Edwards", "Dean Tom"]
 console.log(people.find("Dean Edwards"));  // ["Dean Edwards"]
-
+# call apply bind （前三个正确）
+obj.myFun.call(db,'成都','上海')；　　　　 // 德玛 年龄 99  来自 成都去往上海
+obj.myFun.apply(db,['成都','上海']);      // 德玛 年龄 99  来自 成都去往上海  
+obj.myFun.bind(db,'成都','上海')();       // 德玛 年龄 99  来自 成都去往上海
+obj.myFun.bind(db,['成都','上海'])();　　 // 德玛 年龄 99  来自 成都, 上海去往 undefined
